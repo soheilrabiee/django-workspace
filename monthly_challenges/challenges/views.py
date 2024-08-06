@@ -19,7 +19,21 @@ monthly_challenges_text = {
 # Create your views here.
 
 
+def monthly_challenge_by_number(request, month):
+    """Takes a number [1,12] and redirects the user to the correct month"""
+    months = list(monthly_challenges_text.keys())
+
+    if month > len(months):
+        return HttpResponseNotFound("Invalid month!")
+
+    redirect_month = months[month - 1]
+    return HttpResponseRedirect(f"/challenges/" + redirect_month)
+
+
 def monthly_challenge(request, month):
-    if month in monthly_challenges_text:
-        return HttpResponse(f"{monthly_challenges_text[month]}")
-    return HttpResponseNotFound("Incorrect month!")
+    """Checks the dict and returns the value based of month"""
+    try:
+        output = monthly_challenges_text[month]
+        return HttpResponse(output)
+    except:
+        return HttpResponseNotFound("Invalid month!")
