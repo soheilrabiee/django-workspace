@@ -36,6 +36,16 @@ def monthly_challenge(request, month):
     """Checks the dict and returns the value based of month"""
     try:
         output = monthly_challenges_text[month]
-        return HttpResponse(output)
+        return HttpResponse(f"<h1>{output}</h1>")
     except:
-        return HttpResponseNotFound("Invalid month!")
+        return HttpResponseNotFound("<h1>Invalid month!</h1>")
+
+
+def index(request):
+    """Makes a list of links to the challenges of each month"""
+    list_items = ""
+    for month in monthly_challenges_text.keys():
+        item_path = reverse(viewname="month-challenge", args=[month])
+        list_items += f'<li><a href="{item_path}">{month.capitalize()}</a></li>'
+
+    return HttpResponse(f"<ul>{list_items}</ul>")
