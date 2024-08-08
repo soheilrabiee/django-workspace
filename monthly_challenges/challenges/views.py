@@ -36,7 +36,11 @@ def monthly_challenge(request, month):
     """Checks the dict and returns the value based of month"""
     try:
         output = monthly_challenges_text[month]
-        return render(request, "challenges/challenge.html")
+        return render(
+            request,
+            "challenges/challenge.html",
+            {"text": output, "month_name": month.capitalize()},
+        )
     except:
         return HttpResponseNotFound("<h1>Invalid month!</h1>")
 
