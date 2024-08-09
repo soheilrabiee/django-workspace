@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,6 +8,7 @@
         <title>
             {% block page_title %}My Challenges{% endblock page_title %}
         </title>
+        <link rel="stylesheet" href="{% static "base.css" %}" 
         {% block css_files %}{% endblock css_files %}
     </head>
     <body>
